@@ -42,7 +42,12 @@ public class Biblioteca {
 								System.out.println("\n¿Cuál es el título?");
 								titulo = leer.nextLine();
 								
-								publicaciones[Publicacion.getPublicaciones()] = new Libro(isbn, anioPublicacion, autor, titulo);
+								for (int x = 0; x < publicaciones.length; x++) {
+									if (publicaciones[x] == null) {
+										publicaciones[x] = new Libro(isbn, anioPublicacion, autor, titulo);
+										break;
+									}
+								}
 								
 							} else if (tipo.equalsIgnoreCase("revista")) {
 								System.out.println("\n¿Cuál es el ISSN de la revista?");
@@ -56,7 +61,12 @@ public class Biblioteca {
 								
 								leer.nextLine();
 								
-								publicaciones[Publicacion.getPublicaciones()] = new Revista(issn, anioPublicacion, numRevista);
+								for (int x = 0; x < publicaciones.length; x++) {
+									if (publicaciones[x] == null) {
+										publicaciones[x] = new Revista(issn, anioPublicacion, numRevista);
+										break;
+									}
+								}
 							}
 						} else {
 							System.out.println("\nSe ha alcanzado el máximo de publicaciones, por favor elimine una para añadir más");
@@ -69,20 +79,63 @@ public class Biblioteca {
 					codBuscar = leer.next();
 					
 					for (int i = 0; i < publicaciones.length; i++) {
-						if (publicaciones[i].getCod() == codBuscar) {
+						if (publicaciones[i] != null && publicaciones[i].getCod().equalsIgnoreCase(codBuscar)) {
 							if (publicaciones[i] instanceof Libro) {
-								((Libro) publicaciones[i]).toString();
+								System.out.println(((Libro) publicaciones[i]).toString());
 							} else if (publicaciones[i] instanceof Revista) {
-								((Revista) publicaciones[i]).toString();
+								System.out.println(((Revista) publicaciones[i]).toString());
 							}
+							break;
 						}
 					}
 					break;
 				case 3:
+					System.out.println("\nDime el ISBN del libro");
+					codBuscar = leer.next();
+					
+					for (int i = 0; i < publicaciones.length; i++) {
+						if (publicaciones[i] != null && publicaciones[i] instanceof Libro && publicaciones[i].getCod().equals(codBuscar)) {
+							if (!((Libro) publicaciones[i]).isPrestado()) {
+								((Libro) publicaciones[i]).setPrestado(true);
+							} else {
+								System.out.println("El libro con ISBN " + codBuscar + " está prestado");
+							}
+							break;
+						}
+					}
 					break;
 				case 4:
+					System.out.println("\nDime el ISBN del libro");
+					codBuscar = leer.next();
+					
+					for (int i = 0; i < publicaciones.length; i++) {
+						if (publicaciones[i] != null && publicaciones[i] instanceof Libro && publicaciones[i].getCod().equals(codBuscar)) {
+							if (((Libro) publicaciones[i]).isPrestado()) {
+								((Libro) publicaciones[i]).setPrestado(false);
+								System.out.println(((Libro) publicaciones[i]).toString());
+							} else {
+								System.out.println("El libro con ISBN " + codBuscar + " no esta prestado asique no se puede devolver");
+							}
+							break;
+						}
+					}
 					break;
 				case 5:
+					System.out.println("\nDime el ISBN/ISSN de la publicación a eliminar");
+					codBuscar = leer.next();
+					
+					for (int i = 0; i < publicaciones.length; i++) {
+						if (publicaciones[i] != null && publicaciones[i].getCod().equals(codBuscar)) {
+							if (publicaciones[i] instanceof Libro && !((Libro) publicaciones[i]).isPrestado()) {
+								publicaciones[i] = null;
+							} else if (publicaciones[i] instanceof Revista) {
+								publicaciones[i] = null;
+							} else {
+								System.out.println("El libro está prestado y no se puede eliminar");
+							}
+							break;
+						}
+					}
 					break;
 				case 6:
 					System.out.println("Saliendo...");

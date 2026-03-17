@@ -11,7 +11,7 @@ public class Revista extends Publicacion {
 	
 	@Override
 	public String toString() {
-		return "\nISBN: " + super.toString() + "\nNÚMERO DE REVISTA: " + this.getNum();
+		return "\nISSN: " + super.toString() + "\nNÚMERO DE REVISTA: " + this.getNum();
 	}
 	
 	public int getNum() {
