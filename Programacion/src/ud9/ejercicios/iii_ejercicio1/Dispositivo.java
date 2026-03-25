@@ -6,8 +6,8 @@ public abstract class Dispositivo {
 	private double precio;
 	private Fabricante fabricante;
 	
-	public Dispositivo(String nombreFabricante, String pais, String nombre, String version, double precio) {
-		this.fabricante = new Fabricante(nombreFabricante, pais);
+	public Dispositivo(Fabricante fabricante, String nombre, String version, double precio) {
+		this.setFabricante(fabricante);
 		this.nombre = nombre;
 		this.version = version;
 		this.precio = precio;

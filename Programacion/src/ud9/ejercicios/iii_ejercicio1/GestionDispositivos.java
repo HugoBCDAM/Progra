@@ -4,10 +4,13 @@ public class GestionDispositivos {
 
 	public static void main(String[] args) {
 		
-		Dispositivo s1 = new Smartphone("intel", "estados unidos", "s1", "1.0.0", 9.99, 50);
-		Dispositivo s2 = new Smartphone("asus", "españa", "s2", "1.0.1", 5.99, 45);
-		Dispositivo l1 = new Laptop("asus", "españa", "l1", "1.0.0", 5.99, 16);
-		Dispositivo l2 = new Laptop("intel", "estados unidos", "l2", "1.0.1", 4.99, 32);
+		Fabricante f1 = new Fabricante("intel", "estados unidos");
+		Fabricante f2 = new Fabricante("asus", "españa");
+		
+		Dispositivo s1 = new Smartphone(f1, "s1", "1.0.0", 9.99, 50);
+		Dispositivo s2 = new Smartphone(f2, "s2", "1.0.1", 5.99, 45);
+		Dispositivo l1 = new Laptop(f1, "l1", "1.0.0", 5.99, 16);
+		Dispositivo l2 = new Laptop(f2, "l2", "1.0.1", 4.99, 32);
 		
 		Dispositivo[] dispositivos = {s1, s2, l1, l2};
 		

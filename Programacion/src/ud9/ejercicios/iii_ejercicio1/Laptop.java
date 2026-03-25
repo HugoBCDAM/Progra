@@ -6,8 +6,8 @@ public class Laptop extends Dispositivo {
 	
 	private int memoriaRam; //Medida en GB
 	
-	public Laptop(String nombreFabricante, String pais, String nombre, String version, double precio, int memoria) {
-		super(nombreFabricante, pais, nombre, version, precio);
+	public Laptop(Fabricante fabricante, String nombre, String version, double precio, int memoria) {
+		super(fabricante, nombre, version, precio);
 		this.memoriaRam = memoria;
 	}
 	

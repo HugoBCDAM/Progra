@@ -6,8 +6,8 @@ public class Smartphone extends Dispositivo {
 	
 	private int capacidadBateria; //Capacidad bateria medida en mAh
 	
-	public Smartphone(String nombreFabricante, String pais, String nombre, String version, double precio, int capacidad) {
-		super(nombreFabricante, pais, nombre, version, precio);
+	public Smartphone(Fabricante fabricante, String nombre, String version, double precio, int capacidad) {
+		super(fabricante, nombre, version, precio);
 		this.capacidadBateria = capacidad;
 	}
 	
@@ -16,7 +16,7 @@ public class Smartphone extends Dispositivo {
 		Scanner leer = new Scanner(System.in);
 		String respuesta;
 		
-		System.out.println("¿Está activada la biometría facial y/o dactilar?");
+		System.out.println("¿Está activada la biometría facial y/o dactilar?(si/no)");
 		respuesta = leer.next();
 		
 		if (respuesta.equalsIgnoreCase("si")) {
