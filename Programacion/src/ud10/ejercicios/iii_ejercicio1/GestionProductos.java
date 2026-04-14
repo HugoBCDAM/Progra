@@ -58,6 +58,7 @@ public class GestionProductos {
 			} else {
 				listaProductos.add(p);
 			}
+			
 		}
 	}
 }
