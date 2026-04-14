@@ -56,7 +56,7 @@ public class GestionProductos {
                 p.setStock(p.getStock() + p.getStock());
                 return;
 			} else {
-				listaProductos.add(p);			
+				listaProductos.add(p);
 			}
 		}
 	}
