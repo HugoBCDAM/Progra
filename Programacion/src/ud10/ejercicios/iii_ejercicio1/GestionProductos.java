@@ -1,6 +1,7 @@
 package ud10.ejercicios.iii_ejercicio1;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class GestionProductos {
@@ -65,4 +66,34 @@ public class GestionProductos {
 			listaProductos.add(p);		
 		}
 	}
+	
+	public void aumentarPrecio(String tipo,int porcentaje) {
+		double precioAumentar = 1 + (porcentaje / 100);
+		
+		for (Producto pr : listaProductos) {
+			if (pr.getTipo().equals(tipo)) {
+				pr.setPrecio(pr.getPrecio() * precioAumentar);
+			}
+		}
+		
+	}
+	
+	public void eliminarSinStock() {
+		Iterator<Producto> it = listaProductos.iterator();
+		
+		while (it.hasNext()) {
+			if (it.next().getStock() <= 0) {
+				it.remove();
+			}
+		}
+	}
+
+	public boolean equals(Object obj, Object obj2) {
+		if (((Producto)obj).getCod() == ((Producto)obj2).getCod() && ((Producto)obj).getNombre().equals(((Producto)obj2).getNombre())) {
+			return true;
+		}
+		return false;
+	}
+	
+	
 }
