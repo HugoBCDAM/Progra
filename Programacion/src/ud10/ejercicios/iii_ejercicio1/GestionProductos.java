@@ -62,6 +62,7 @@ public class GestionProductos {
 		}
 		
 		if (!existe) {
-			listaProductos.add(p);		}
+			listaProductos.add(p);		
+		}
 	}
 }
