@@ -41,8 +41,11 @@ public class GestionProductos {
 	}
 	
 	public void agregarSinDuplicados(Producto p) throws DatosException {
+		boolean existe = false;
+		
 		for (Producto pr : listaProductos) {
 			if (pr.getCod() == p.getCod()) {
+				existe = true;
                 if (!p.getNombre().equals(p.getNombre()) || !p.getTipo().equals(p.getTipo())) {
                     throw new DatosException("El código ya existe con diferentes datos.");
                 }
@@ -55,10 +58,10 @@ public class GestionProductos {
 
                 p.setStock(p.getStock() + p.getStock());
                 return;
-			} else {
-				listaProductos.add(p);
 			}
-			
 		}
+		
+		if (!existe) {
+			listaProductos.add(p);		}
 	}
 }
