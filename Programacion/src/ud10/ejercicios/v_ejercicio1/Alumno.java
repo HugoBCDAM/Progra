@@ -1,6 +1,6 @@
 package ud10.ejercicios.v_ejercicio1;
 
-public class Alumno {
+public class Alumno implements Comparable<Alumno>{
 	
 	String nombre;
 	int edad, nota;
@@ -9,10 +9,6 @@ public class Alumno {
 		this.nombre = nombre;
 		this.edad = edad;
 		this.nota = nota;
-	}
-	
-	public void ordenarNombre(Alumno a) {
-		
 	}
 	
 	public String getNombre() {
@@ -37,6 +33,17 @@ public class Alumno {
 
 	public void setNota(int nota) {
 		this.nota = nota;
+	}
+
+	@Override
+	public int compareTo(Alumno a) {
+		int resultado = a.getNota() - this.nota;
+		
+		if (resultado == 0 ) {
+			return this.nombre.compareTo(a.nombre);
+		} else {
+			return resultado;
+		}
 	}
 	
 }
