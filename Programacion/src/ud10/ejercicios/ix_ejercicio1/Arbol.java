@@ -29,6 +29,20 @@ public class Arbol extends Planta {
 		System.out.println("El árbol ha crecido " + crecimiento + " unidades");
 	}
 	
+	@Override
+	public void regar(int cantidadAgua) throws RiegoExcesivoException {
+		if (!this.isNecesitaAgua()) {
+			throw new RiegoExcesivoException("La planta no necesita agua en este momento");
+		} else {
+			if (this.getMAX_AGUA() < cantidadAgua) {
+				throw new RiegoExcesivoException("Cantidad de agua excesiva para esta planta");
+			} else {
+				this.setNecesitaAgua(false);
+				System.out.println("Se aplicó " + cantidadAgua + " cantidad de agua");
+			}
+		}
+	}
+	
 	public int getEdad() {
 		return edad;
 	}
@@ -38,7 +52,7 @@ public class Arbol extends Planta {
 	public String getTipoHoja() {
 		return tipoHoja;
 	}
-	public void setTipoHoja(String tipoHoja) {
+	public void setTipoHoja(String tipoHoja){
 		if (tipoHoja.equalsIgnoreCase("caduca") || tipoHoja.equalsIgnoreCase("perenne")) {
 			this.tipoHoja = tipoHoja;
 		}

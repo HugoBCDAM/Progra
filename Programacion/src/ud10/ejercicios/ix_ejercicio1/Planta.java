@@ -22,24 +22,7 @@ public abstract class Planta implements Cuidable {
 		}
 	}
 	
-	public void regar(int cantidadAgua) throws RiegoExcesivoException {
-		if (!this.necesitaAgua) {
-			throw new RiegoExcesivoException("La planta no necesita agua en este momento");
-		} else {
-			if (this instanceof Arbol) {
-				if (((Arbol) this).getMAX_AGUA() < cantidadAgua) {
-					throw new RiegoExcesivoException("Cantidad de agua excesiva para esta planta");
-				}
-			} else if (this instanceof Flor) {
-				if (((Flor) this).getMAX_AGUA() < cantidadAgua) {
-					throw new RiegoExcesivoException("Cantidad de agua excesiva para esta planta");
-				}
-			} else {
-				this.necesitaAgua = false;
-				System.out.println("Se aplicó " + cantidadAgua + " cantidad de agua");
-			}
-		}
-	}
+	public abstract void regar(int cantidadAgua) throws RiegoExcesivoException;
 	
 	public abstract void crecer();
 	
@@ -53,19 +36,13 @@ public abstract class Planta implements Cuidable {
 		}
 	}
 	
-	public int totalPlantas() {
+	public static int totalPlantas() {
 		return Planta.getTotalPlantas();
 	}
 	
 	@Override
 	public boolean necesitaRiego() {
-		boolean necesitaRiego = false;
-		
-		if (this.isNecesitaAgua()) {
-			necesitaRiego = true;
-		}
-		
-		return necesitaRiego;
+		return this.isNecesitaAgua();
 	}
 	
 	@Override
@@ -110,9 +87,6 @@ public abstract class Planta implements Cuidable {
 	}
 	public static int getTotalPlantas() {
 		return totalPlantas;
-	}
-	public static void setTotalPlantas(int totalPlantas) {
-		Planta.totalPlantas = totalPlantas;
 	}
 	
 }

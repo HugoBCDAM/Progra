@@ -20,6 +20,20 @@ public class Flor extends Planta {
 		System.out.println("La flor ha crecido " + crecimiento + " unidades");
 	}
 	
+	@Override
+	public void regar(int cantidadAgua) throws RiegoExcesivoException {
+		if (!this.isNecesitaAgua()) {
+			throw new RiegoExcesivoException("La planta no necesita agua en este momento");
+		} else {
+			if (this.getMAX_AGUA() < cantidadAgua) {
+				throw new RiegoExcesivoException("Cantidad de agua excesiva para esta planta");
+			} else {
+				this.setNecesitaAgua(false);
+				System.out.println("Se aplicó " + cantidadAgua + " cantidad de agua");
+			}
+		}
+	}
+	
 	public String getColor() {
 		return color;
 	}
@@ -31,6 +45,5 @@ public class Flor extends Planta {
 	public int getMAX_AGUA() {
 		return MAX_AGUA;
 	}
-	
 	
 }
