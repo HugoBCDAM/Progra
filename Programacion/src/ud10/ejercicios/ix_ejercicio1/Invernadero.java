@@ -30,10 +30,12 @@ public class Invernadero {
 			case 1: 
 				Planta a1 = new Arbol("Roble", "A1", 5.3, 10, "Caduca");
 				Planta a2 = new Arbol("Pino", "A2", 7.8, 15, "Perenne");
+				
 				plantas.add(a1);
 				plantas.add(a2);
 				mapaPlantas.put(a1.getId(), a1);
 				mapaPlantas.put(a2.getId(), a2);
+				
 				Planta f1 = new Flor("Rosa", "F1", 0.5, "Rojo");
 				Planta f2 = new Flor("Tulipán", "F2", 0.4, "Amarillo");
 				
