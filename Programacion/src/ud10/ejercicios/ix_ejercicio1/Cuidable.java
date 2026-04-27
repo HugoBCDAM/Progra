@@ -2,7 +2,7 @@ package ud10.ejercicios.ix_ejercicio1;
 
 public interface Cuidable {
 	
-	public default String recomendarRiego(Planta p) {
+	public static String recomendarRiego(Planta p) {
 		String mensaje = "";
 		if (p.isNecesitaAgua()) {
 			mensaje = "Recomiendo regar la planta";
