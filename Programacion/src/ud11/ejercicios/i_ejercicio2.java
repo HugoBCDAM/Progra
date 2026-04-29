@@ -20,8 +20,8 @@ public class i_ejercicio2 {
 		
 		File f = new File("C:/Users/Diurno/ejercicios/" + fichero + ".txt");
 		if (f.exists()) {
-			try (BufferedReader pw = new BufferedReader(new FileReader(f))) {
-				while ((linea = pw.readLine()) != null) {
+			try (BufferedReader br = new BufferedReader(new FileReader(f))) {
+				while ((linea = br.readLine()) != null) {
 					System.out.println(linea);
 				}
 			} catch (IOException e) {
