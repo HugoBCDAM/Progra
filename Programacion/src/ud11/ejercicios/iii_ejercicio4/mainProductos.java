@@ -12,7 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-public class main {
+public class mainProductos {
 
 	public static void main(String[] args) {
 		
@@ -21,13 +21,23 @@ public class main {
 		File f = new File("productos.csv");
 		List<Producto> productos = new ArrayList<>();
 		
-		Producto p1 = new Producto("Ratón", 5.99, 5);
-		Producto p2 = new Producto("Teclado", 15.99, 10);
-		Producto p3 = new Producto("Monitor", 109.99, 3);
-		
-		productos.add(p1);
-		productos.add(p2);
-		productos.add(p3);
+		if (f.exists()) {
+			try (BufferedReader bf = new BufferedReader(new FileReader(f))) {
+				String linea;
+				String[] producto;
+				
+				linea = bf.readLine();
+				while ((linea = bf.readLine()) != null) {
+					producto = linea.split(";");
+					Producto p = new Producto(producto[0], Double.parseDouble(producto[1]), Integer.parseInt(producto[2]));
+					productos.add(p);
+				}
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		
 		int opcion, stock;
 		String nombre;
