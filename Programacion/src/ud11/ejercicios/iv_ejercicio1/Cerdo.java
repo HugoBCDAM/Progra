@@ -19,7 +19,7 @@ public class Cerdo extends Animal {
 
 	@Override
 	public String toString() {
-		return "Cerdo [tipoJamon=" + tipoJamon + "]";
+		return super.toString() + "\nTipo de Jamón: " + this.getTipoJamon();
 	}
 	
 }

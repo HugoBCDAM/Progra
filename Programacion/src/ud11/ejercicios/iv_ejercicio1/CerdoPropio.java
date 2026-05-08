@@ -28,7 +28,7 @@ public class CerdoPropio extends Cerdo {
 
 	@Override
 	public String toString() {
-		return "CerdoPropio [nombrePadre=" + nombrePadre + ", nombreMadre=" + nombreMadre + "]";
+		return super.toString() + "\nNombre del padre: " + this.getNombrePadre() + "\nNombre de la madre: " + this.getNombreMadre();
 	}
 	
 }

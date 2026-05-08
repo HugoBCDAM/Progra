@@ -28,7 +28,7 @@ public class VacaPropia extends Vaca {
 
 	@Override
 	public String toString() {
-		return "VacaPropia [nombrePadre=" + nombrePadre + ", nombreMadre=" + nombreMadre + "]";
+		return super.toString() + "\nNombre del padre: " + this.getNombrePadre() + "\nNombre de la madre: " + this.getNombreMadre();
 	}
 	
 }

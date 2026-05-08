@@ -19,7 +19,7 @@ public class VacaImportacion extends Vaca {
 
 	@Override
 	public String toString() {
-		return "VacaImportacion [paisProcedencia=" + paisProcedencia + "]";
+		return super.toString() + "\nPaís de procedencia: " + this.paisProcedencia;
 	}
 	
 }

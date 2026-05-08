@@ -19,7 +19,7 @@ public class Vaca extends Animal {
 
 	@Override
 	public String toString() {
-		return "Vaca [lechera=" + lechera + "]";
+		return super.toString() + "\nLechera: " + this.isLechera();
 	}
 	
 }

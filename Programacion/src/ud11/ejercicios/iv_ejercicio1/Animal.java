@@ -5,8 +5,7 @@ public class Animal {
 	private String nombre, raza, fechaNacimiento;
 	private double peso;
 	private char sexo;
-	private static int numeroAnimales, animalesIncinerados;
-	private boolean encefalopatia, peste;
+	private EstadoAnimal estado;
 	
 	public Animal(String nombre, String raza, double peso, char sexo, String fechaNacimiento) {
 		this.nombre = nombre;
@@ -14,74 +13,21 @@ public class Animal {
 		this.peso = peso;
 		this.sexo = sexo;
 		this.fechaNacimiento = fechaNacimiento;
-		this.encefalopatia = false;
-		this.peste = false;
-		Animal.numeroAnimales++;
-	}
-	
-	public void examinar() {
-		int probabilidad = (int) Math.random() * 101;
-		if (this instanceof VacaPropia) {
-			if (probabilidad >= 0 && probabilidad <= 20) {
-				this.setEncefalopatia(true);
-			}
-		} else if (this instanceof VacaImportacion) {
-			if (probabilidad >= 0 && probabilidad <= 30) {
-				this.setEncefalopatia(true);
-			}
-		} else if (this instanceof CerdoPropio) {
-			if (probabilidad >= 0 && probabilidad <= 10) {
-				this.setPeste(true);
-			}
-		} else if (this instanceof Cerdo) {
-			if (probabilidad >= 0 && probabilidad <= 40) {
-				this.setPeste(true);
-			}
-		}
-	}
-	
-	public void incinerar() {
-		if (this.isEncefalopatia() || this.isPeste()) {
-			Animal.animalesIncinerados++;
-		}
+		this.estado = EstadoAnimal.SIN_EXAMINAR;
 	}
 	
 	@Override
 	public String toString() {
-		return "Animal [nombre=" + nombre + ", raza=" + raza + ", fechaNacimiento=" + fechaNacimiento + ", peso=" + peso
-				+ ", sexo=" + sexo + ", encefalopatia=" + encefalopatia + ", peste=" + peste + "]";
-	}
-
-	public boolean isEncefalopatia() {
-		return encefalopatia;
-	}
-
-	public void setEncefalopatia(boolean encefalopatia) {
-		this.encefalopatia = encefalopatia;
-	}
-
-	public boolean isPeste() {
-		return peste;
-	}
-
-	public void setPeste(boolean peste) {
-		this.peste = peste;
-	}
-
-	public static int getAnimalesIncinerados() {
-		return animalesIncinerados;
-	}
-
-	public static void setAnimalesIncinerados(int animalesIncinerados) {
-		Animal.animalesIncinerados = animalesIncinerados;
-	}
-
-	public static int getNumeroAnimales() {
-		return numeroAnimales;
+		return "Nombre: " + this.getNombre() + "\nRaza: " + this.getRaza() + "\nPeso: " + this.getPeso() + "\nSexo" + this.getSexo() 
+		+ "\nFecha de Nacimiento: " + this.getFechaNacimiento() + "\nEstado: " + this.getEstado();
 	}
 	
-	public static void setNumeroAnimales(int numeroAnimales) {
-		Animal.numeroAnimales = numeroAnimales;
+	public EstadoAnimal getEstado() {
+		return estado;
+	}
+
+	public void setEstado(EstadoAnimal estado) {
+		this.estado = estado;
 	}
 
 	public String getNombre() {
