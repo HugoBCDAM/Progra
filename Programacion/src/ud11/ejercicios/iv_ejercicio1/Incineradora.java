@@ -15,9 +15,11 @@ public class Incineradora {
 		if (a instanceof Cerdo && a.getEstado().equals(EstadoAnimal.PESTE)) {
 			this.tiempo += (int) (Math.random() * 21) + 80;
 			Incineradora.animalesIncinerados++;
+			a.setEstado(EstadoAnimal.INCINERADO);
 		} else if (a instanceof Vaca && a.getEstado().equals(EstadoAnimal.ENCEFALOPATIA_ESPONJIFORME)) {
 			this.tiempo += 160;
 			Incineradora.animalesIncinerados++;
+			a.setEstado(EstadoAnimal.INCINERADO);
 		}
 	}
 	

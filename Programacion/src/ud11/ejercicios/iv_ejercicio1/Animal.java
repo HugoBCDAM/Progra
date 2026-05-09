@@ -1,6 +1,6 @@
 package ud11.ejercicios.iv_ejercicio1;
 
-public class Animal {
+public class Animal implements Comparable<Animal> {
 	
 	private String nombre, raza, fechaNacimiento;
 	private double peso;
@@ -70,5 +70,14 @@ public class Animal {
 		this.sexo = sexo;
 	}
 
-	
+	@Override
+	public int compareTo(Animal o) {
+		if (this.getPeso() > o.getPeso()) {
+			return -1;
+		} else if (this.getPeso() < o.getPeso()) {
+			return 1;
+		}
+		
+		return this.getNombre().compareTo(o.getNombre());
+	}
 }

@@ -1,6 +1,7 @@
 package ud11.ejercicios.iv_ejercicio1;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Granja {
@@ -45,10 +46,8 @@ public class Granja {
 		for (Animal animal : animales) {
 			if (animal instanceof Cerdo) {
 				incineradora_cerdo.incinerar(animal);
-				animal.setEstado(EstadoAnimal.INCINERADO);
 			} else if (animal instanceof Vaca) {
 				incineradora_vaca.incinerar(animal);
-				animal.setEstado(EstadoAnimal.INCINERADO);
 			}
 		}
 		
@@ -56,6 +55,22 @@ public class Granja {
 		System.out.println("TIEMPO TOTAL DEL SERVICIO DEL VETERINARIO: " + v.getTiempo() + " MINUTOS");
 		System.out.println("TIEMPO TOTAL DEL SERVICIO DE LAS INCINERADORAS: \n -INCINERADORA DE VACAS - " + incineradora_vaca.getTiempo() + " MINUTOS"
 				+ "\n -INCINERADORA DE CERDOS - " + incineradora_cerdo.getTiempo() + " MINUTOS");
+		System.out.println("TIEMPO MEDIO DE SERVICIO DEL VETERINARIO: " + v.getTiempo() / animales.size() + " MINUTOS");
+		System.out.println("TIEMPO MEDIO DE SERVICIO DE LAS INCINERADORAS: " + (incineradora_cerdo.getTiempo() + incineradora_vaca.getTiempo()) / Incineradora.getAnimalesIncinerados() + " MINUTOS");
+		System.out.println("NÚMERO DE ANIMALES ESPERANDO A SER ATENDIDOS: " + (animales.size() - Veterinario.getAnimalesAtendidos()));
+		System.out.println("NÚMERO DE ANIMALES ESPERANDO A SER INCINERADOS: " + (Veterinario.getAnimalesIncinerar() - Incineradora.getAnimalesIncinerados()));
+		System.out.println("EL VETERINARIO TARDA " + v.getTiempo() + " MINUTOS PARA EXAMINAR A TODOS LOS ANIMALES");
+		
+		List<Animal> animalesOrdenados = new ArrayList<>();
+		animalesOrdenados.addAll(animales);
+		Collections.sort(animalesOrdenados);
+		
+		System.out.println("LISTA DE ANIMALES ORDENADA DE MAYOR A MENOR PESO, Y EN CASO DE HABER EMPATE, EN ORDEN ALFABÉTICO SEGÚN EL NOMBRE:\n");
+		for (Animal animal : animalesOrdenados) {
+			System.out.println(animal.toString() + "\n");
+		}
+		
+		
 	}
 
 }
