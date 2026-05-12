@@ -9,27 +9,28 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
 public class Instituto {
 
 	public static void main(String[] args) {
-		
+
 		Scanner leer = new Scanner(System.in);
 		int opcion, edad;
-		List<Estudiante> estudiantes = new ArrayList<>();
 		String nombre;
-		double nota;
+		double nota, notaMedia = 0;
+		List<Estudiante> estudiantes = new ArrayList<>();
 		File f;
 		do {
-			System.out.println("1. Añadir estudiante.\n2. Nota media de los estudiantes.\n3. Ordenar por nombre.\n4. Ordenar por nota"
-					+ "\n5. Almacenar en fichero.\n6. Leer de fichero (nota media, al menos, un 5\n0. Salir");
+			System.out.println("*** MENÚ ***\n1. Añadir estudiante. Lo añadirá a la lista\n2. Nota media. Calculará la nota media de todos los estudiantes almacenados\n3. Ordenar por nombre. Mostrará la lista ordenada "
+					+ "alfabéticamente por nombre.\n4. Ordenar por nota. Mostrará la lista ordenada alfabéticamente por nota media\n5. Almacenar en fichero. Almacenará todos los estudiantes de la lista en un fichero "
+					+ "llamado estudiantes.txt\n6. Leer de fichero. Leyendo del fichero estudiantes.txt, mostrará aquellos que tengan como nota media, al menos, un 5\n0. Salir");
 			opcion = leer.nextInt();
 			
 			switch (opcion) {
 			case 1:
+				leer.nextLine();
 				System.out.println("Dime el nombre del estudiante");
 				nombre = leer.nextLine();
 				System.out.println("Dime la edad del estudiante");
@@ -40,51 +41,52 @@ public class Instituto {
 				estudiantes.add(new Estudiante(nombre, edad, nota));
 				break;
 			case 2:
-				int sumaNotas = 0;
 				for (Estudiante e : estudiantes) {
-					sumaNotas += e.getNota();
+					notaMedia += e.getNotaMedia();
 				}
-				System.out.println("Nota media de los estudiantes: " + sumaNotas / estudiantes.size());
+				
+				System.out.println("Nota media de los estudiantes: " + notaMedia / estudiantes.size());
 				break;
 			case 3:
 				Collections.sort(estudiantes);
+				System.out.println("Lista ordenada por nombre: ");
+				for (Estudiante e : estudiantes) {
+					System.out.println(e);
+				}
 				break;
 			case 4:
-				Collections.sort(estudiantes, new Comparator<Estudiante>() {
-					@Override
-					public int compare(Estudiante o1, Estudiante o2) {
-						if (o1.getNota() > o2.getNota()) {
-							return 1;
-						} else if (o1.getNota() < o2.getNota()) {
-							return -1;
-						} else {
-							return 0;
-						}
-					}
-				});
+				Collections.sort(estudiantes, new EstudiantePorNota());
+				System.out.println("Lista ordenada por nota: ");
+				for (Estudiante e : estudiantes) {
+					System.out.println(e);
+				}
 				break;
 			case 5:
-				System.out.println("Dime el fichero que quieres utilizar");
-				f = new File(leer.nextLine());
+				f = new File("estudiantes.txt");
 				
 				try (PrintWriter pw = new PrintWriter(new FileWriter(f))){
-					pw.println("NOMBRE;EDAD;NOTA");
+					pw.println("NOMBRE-EDAD-NOTA");
 					for (Estudiante e : estudiantes) {
-						pw.println(e.getNombre() + ";" + e.getEdad() + ";" + e.getNota());
+						pw.println(e.getNombre() + "-" + e.getEdad() + "-" + e.getNotaMedia());
 					}
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
 				break;
 			case 6:
-				System.out.println("Dime el fichero de cual leer");
-				f = new File(leer.nextLine());
+				f = new File("estudiantes.txt");
 				
-				try (BufferedReader br = new BufferedReader(new FileReader(f))) {
+				try (BufferedReader br = new BufferedReader(new FileReader(f))){
 					String linea;
+					String[] separacion;
+					
+					br.readLine();
+					System.out.println("NOMBRE\tEDAD\tNOTA");
 					while ((linea = br.readLine()) != null) {
-						String[] lineaSeparada = linea.split(";");
-						System.out.println(lineaSeparada[0] + "\t" + lineaSeparada[1] + "\t" + lineaSeparada[2]);
+						separacion = linea.split("-");
+						if (Integer.parseInt(separacion[1]) >= 5) {
+							System.out.println(separacion[0] + "\t" + separacion[1] + "\t" + separacion[2]);
+						}
 					}
 				} catch (FileNotFoundException e1) {
 					e1.printStackTrace();
@@ -97,5 +99,4 @@ public class Instituto {
 		
 		leer.close();
 	}
-
 }

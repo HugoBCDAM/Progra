@@ -1,0 +1,3 @@
+NOMBRE-EDAD-NOTA
+hugo-20-7.0
+carlos-20-5.0

@@ -1,15 +1,20 @@
 package ud11.ejercicios.vi_ejercicio1;
 
-public class Estudiante implements Comparable<Estudiante> {
+public class Estudiante implements Comparable<Estudiante>{
 	
 	private String nombre;
 	private int edad;
-	private double nota;
+	private double notaMedia;
 	
 	public Estudiante(String nombre, int edad, double nota) {
 		this.nombre = nombre;
 		this.edad = edad;
-		this.nota = nota;
+		this.notaMedia = nota;
+	}
+	
+	@Override
+	public String toString() {
+		return "Estudiante [nombre=" + nombre + ", edad=" + edad + ", notaMedia=" + notaMedia + "]";
 	}
 
 	public String getNombre() {
@@ -28,17 +33,17 @@ public class Estudiante implements Comparable<Estudiante> {
 		this.edad = edad;
 	}
 
-	public double getNota() {
-		return nota;
+	public double getNotaMedia() {
+		return notaMedia;
 	}
 
-	public void setNota(double nota) {
-		this.nota = nota;
+	public void setNotaMedia(double notaMedia) {
+		this.notaMedia = notaMedia;
 	}
-
+	
 	@Override
 	public int compareTo(Estudiante o) {
-		return this.nombre.compareTo(o.nombre);
+		return this.getNombre().compareTo(o.getNombre());
 	}
 	
 }
